@@ -1,14 +1,15 @@
+#install.packages("devtools", dependencies = TRUE)
 #install.packages("rJava", dependencies = TRUE)
-library(rJava)
 
+library(rJava)
 source("FunctionsTwitterApi.R")
 
 #query_string = string to be searched
 #my_filename = string to be used as a part of the filename
 
 #For example
-query_string = "#jenkins"
-my_filename = "jenkins"
+query_string = "#www"
+my_filename = "www"
 
 #get_TwitterData = function (query_string, my_filename) {
 
@@ -79,5 +80,5 @@ my_filename = "jenkins"
   
   save(my_articles, file=my_file)
  
-#  return(my_file)
+  return(my_file)
 #}
