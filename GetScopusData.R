@@ -1,4 +1,4 @@
-#install.packages("text2vec", dependencies = TRUE)
+install.packages("text2vec", dependencies = TRUE)
 library("text2vec")
 
 
@@ -18,8 +18,8 @@ source("FunctionsScopusApi.R")
 
 #For example
 #Finds 321 papers (29 April 2018). Suitable for classroom demo
-query_string = "Continuous Integration"
-my_filename = "ci"
+query_string = "www"
+my_filename = "www"
 
 
 
@@ -27,10 +27,11 @@ my_filename = "ci"
 #for learning it is better to excute in line by line fashion
 #get_ScopusData = function(query_string, my_filename){
 
-  my_query_string = "TITLE-ABS-KEY(\""
-  my_query_string = paste(my_query_string, query_string, sep="")
+  my_query_string = "( SRCTITLE ( \"World Wide Web\" )  OR  CONF ( \"World Wide Web\" )  OR  CONFNAME ( \"World Wide Web\" ) )  AND  ( SRCTITLE ( international  AND conference )  OR  CONF ( international  AND conference )  OR  CONFNAME ( international  AND conference ) )  AND NOT  CONF ( workshop )  AND NOT  CONF ( co-located )  AND NOT  TITLE ( \"workshop on\" )"  
+  #my_query_string = "TITLE-ABS-KEY(\""
+  #my_query_string = paste(my_query_string, query_string, sep="")
   #EDIT this line
-  my_query_string = paste(my_query_string, "\") AND ALL('software testing')", sep="")
+  #my_query_string = paste(my_query_string, "\") AND ALL('software testing')", sep="")
   
   #Get articles and save those - we do not want to re-run the query
   my_articles = get_scopus_papers(my_query_string)
