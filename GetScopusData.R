@@ -20,7 +20,7 @@ source("FunctionsScopusApi.R")
 #Finds 321 papers (29 April 2018). Suitable for classroom demo
 query_string = "www"
 my_filename = "www"
-my_filename ="TSE_articles_clean"
+my_filename ="www_articles_clean"
 
 
 #later you may want to make this function. 
@@ -38,9 +38,9 @@ my_filename ="TSE_articles_clean"
   #Another example. This is ISSN number of IEEE Transactions on Software Engineering (=TSE)
   #This example  returns over 3,000 articles. Will take some time. Speed varies. typical 250 articles per minute
   #my_articles = get_scopus_papers("ISSN(0098-5589)")
-  #save(my_articles, file="data/my_TSE_articles_dirty2.RData")#my_TSE_articles_dirty
+  save(my_articles, file="data/www_articles_dirty.RData")#my_TSE_articles_dirty
   #For classroom demo load data instead of fetching. This is a larger file better for demoing text mining 
-  load ("data/my_TSE_articles_dirty.RData")
+  load ("data/www_articles_dirty.RData")
 
   #Remove copyright sign.
   abstract = my_articles$Abstract

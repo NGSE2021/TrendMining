@@ -15,7 +15,7 @@ require("pdc")
 #May take a long time
 #May not be human readable (for large files)
 #EDIT this row
-my_file <- "my_Scopus_TSE_articles_clean_data.RData"
+my_file <- "my_Scopus_www_articles_clean_data.RData"
 #my_DtmAndDendogramClusterFile = function(my_file) {
 	
   print(paste("Dendogram Cluster, my_file: ", my_file))
@@ -28,7 +28,7 @@ my_file <- "my_Scopus_TSE_articles_clean_data.RData"
   #various stopword lists can be used https://cran.r-project.org/web/packages/stopwords/stopwords.pdf
   #stopword list is also context specific. Here you can do manual removals
 	#also automated methods tf/idf exist. EDIT
-	my_stopwords = c(stopwords::stopwords(language = "en", source = "snowball"),"two", "also","can","software", "paper", "system","systems")
+	my_stopwords = c(stopwords::stopwords(language = "en", source = "snowball"), "show","present","online","using","use","used","study","different","propose","web","two","also","new","paper","large","can","however")
 	
 	#A good is to remove more words that we do not care about 
 	Abstract_clean = removeWords(my_articles$Abstract_clean, my_stopwords)
