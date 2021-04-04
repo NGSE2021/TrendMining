@@ -15,7 +15,7 @@ require("pdc")
 #May take a long time
 #May not be human readable (for large files)
 #EDIT this row
-my_file <- "my_Scopus_www_articles_clean_data.RData"
+my_file <- "my_STO_www_data_clean.RData"
 #my_DtmAndDendogramClusterFile = function(my_file) {
 	
   print(paste("Dendogram Cluster, my_file: ", my_file))
@@ -28,7 +28,13 @@ my_file <- "my_Scopus_www_articles_clean_data.RData"
   #various stopword lists can be used https://cran.r-project.org/web/packages/stopwords/stopwords.pdf
   #stopword list is also context specific. Here you can do manual removals
 	#also automated methods tf/idf exist. EDIT
-	my_stopwords = c(stopwords::stopwords(language = "en", source = "snowball"), "show","present","online","using","use","used","study","different","propose","web","two","also","new","paper","large","can","however")
+  #SCOPUS
+  #my_stopwords = c(stopwords::stopwords(language = "en", source = "snowball"), "show","present","online","using","use","used","study","different","propose","web","two","also","new","paper","large","can","however")
+  #STO
+  my_stopwords = c(stopwords::stopwords(language = "en", source = "snowball"),"one","like","need","want","tried","trying","know", "show","present","online","using","use","used","study","different","propose","web","two","also","new","paper","large","can","however")
+  
+    
+  #my_stopwords = c(stopwords::stopwords(language = "en", source = "snowball"))
 	
 	#A good is to remove more words that we do not care about 
 	Abstract_clean = removeWords(my_articles$Abstract_clean, my_stopwords)
@@ -60,14 +66,14 @@ my_file <- "my_Scopus_www_articles_clean_data.RData"
 	#Convert to martix, compute colSums (total word counds), take only words with more than 500 occurecents, 
 	#and convert to dataframe with two columns: terms and frequencies 
 	#if too many or too little words showup EDIT number 500 accordingly
-	df <- dtm %>% as.matrix %>% colSums %>% subset (. >= 1000) %>% data.frame(term=names(.), freq=.)
+	df <- dtm %>% as.matrix %>% colSums %>% subset (. >= 200) %>% data.frame(term=names(.), freq=.)
 	#do you see any new stopwords that could be added to the list
 	ggplot(df, aes(x = term, y = freq)) + geom_bar(stat = "identity") +xlab("Terms") + ylab("Count") + coord_flip()
 
 	#--------------------Cluster and and Plot dendogram ---------------------------------------
 
 	#We can subset to  200 papers if we have thounsands
-	dtm <- dtm[1:500,]
+	dtm <- dtm[1:200,]
 
 	# Compute distance matrix https://stat.ethz.ch/R-manual/R-devel/library/stats/html/dist.html
 	#https://en.wikipedia.org/wiki/Distance_matrix
@@ -90,6 +96,6 @@ my_file <- "my_Scopus_www_articles_clean_data.RData"
 	#Remember we removed stopwords from title so the variable Title no longer make sense
 	#plot(h, labels = my_articles$Title, sub = "")
 	#when using smaller set e.g. 200 articles only
-	plot(h, labels = my_articles$Title[1:500], sub = "")
+	plot(h, labels = my_articles$Title[1:200], sub = "")
 	dev.off()
 #}

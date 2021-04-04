@@ -21,10 +21,12 @@ source("FunctionsStackOverflowApi.R")
 query_string = "World Wide Web"# 892 results
 
 my_filename = "www"
+my_filename = "www_clean"
 
 #get_stackOverFlowData = function(query_string, my_filename) {
 
   my_articles = get_stackoverflow_data(query_string)
+  save(my_articles, file="data/STO_www_articles_dirty.RData")
   #remove source code and othe stuff from the body of the asnwer. It is called abstract to make it compatible with Scopus data
   abstract = my_articles$Abstract
   abstract = gsub("<code.*/code>", "", abstract)
@@ -50,7 +52,7 @@ my_filename = "www"
   my_file = my_work_dir
   my_file = paste(my_file, "/data/my_STO_", sep="", collapse=" ")
   my_file = paste(my_file, my_filename, sep="", collapse=" ")
-  my_file = paste(my_file, "_data.RData", sep="", collapse=" ")
+  my_file = paste(my_file, "_data_clean.RData", sep="", collapse=" ")
   
   save(my_articles, file=my_file)
 
