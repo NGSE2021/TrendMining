@@ -26,7 +26,7 @@ so_api_key = "9raZ36FkYGFHDSNrW)gdsw(("
 #** GETOLDTWEETS-JAVA PATH
 #** Set path to the directory for "GetOldTweets-java-master"
 getoldtweets_path = paste(getwd(),"/GetOldTweets-java-master", sep="")
-
+tw_api_key = "gcZo8cyaQTzCwM7s9bYSfRVBI"
 
 #** SCOPUS API KEY
 #** Set your own Scopus API key here
@@ -36,7 +36,7 @@ getoldtweets_path = paste(getwd(),"/GetOldTweets-java-master", sep="")
 #** EDIT THE FOLLOWING LINE with YOUR OWN Scopus API key
 #install.packages("rscopus", dependencies = TRUE)
 library("rscopus")
-#set_api_key("e2f0160c4ad4b8dce78a1e9b8a140412")
+set_api_key("e2f0160c4ad4b8dce78a1e9b8a140412")
 #alternatively you may store it a personal file somewhere else. 
-source("C:/Users/mmantyla/Dropbox/Research - Publications/2017 Agile Book Chapter/Scripts/SetScopusApiKey.R") 
+#source("C:/Users/mmantyla/Dropbox/Research - Publications/2017 Agile Book Chapter/Scripts/SetScopusApiKey.R") 
 

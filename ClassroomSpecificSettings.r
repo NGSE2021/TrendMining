@@ -62,6 +62,6 @@ sc_api_key = "9d8cf209ec6c67867bc44a5247ad0e52"
 
 so_api_key = "9raZ36FkYGFHDSNrW)gdsw(("
 
-tw_api_key = ""
+tw_api_key = "gcZo8cyaQTzCwM7s9bYSfRVBI"
 
 getoldtweets_path = paste(my_work_dir,"/GetOldTweets-java-master", sep="")

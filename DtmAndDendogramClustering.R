@@ -1,11 +1,13 @@
-#install.packages("ggplot2", dependencies = TRUE)
-#install.packages("tm", dependencies = TRUE)
-#install.packages("magrittr", dependencies = TRUE)
-#install.packages("stopwords", dependencies = TRUE)
+install.packages("ggplot2", dependencies = TRUE)
+install.packages("tm", dependencies = TRUE)
+install.packages("magrittr", dependencies = TRUE)
+install.packages("stopwords", dependencies = TRUE)
+install.packages("pdc", dependencies = TRUE)
 library("tm")
 library("stopwords")
 library("magrittr")
 library("ggplot2")
+require("pdc")
 
 #library(SnowballC)
 
@@ -26,7 +28,7 @@ my_file <- "my_Scopus_TSE_articles_clean_data.RData"
   #various stopword lists can be used https://cran.r-project.org/web/packages/stopwords/stopwords.pdf
   #stopword list is also context specific. Here you can do manual removals
 	#also automated methods tf/idf exist. EDIT
-	my_stopwords = c(stopwords::stopwords(language = "en", source = "snowball"),"myStopword1", "myStopword2")
+	my_stopwords = c(stopwords::stopwords(language = "en", source = "snowball"),"two", "also","can","software", "paper", "system","systems")
 	
 	#A good is to remove more words that we do not care about 
 	Abstract_clean = removeWords(my_articles$Abstract_clean, my_stopwords)
@@ -58,14 +60,14 @@ my_file <- "my_Scopus_TSE_articles_clean_data.RData"
 	#Convert to martix, compute colSums (total word counds), take only words with more than 500 occurecents, 
 	#and convert to dataframe with two columns: terms and frequencies 
 	#if too many or too little words showup EDIT number 500 accordingly
-	df <- dtm %>% as.matrix %>% colSums %>% subset (. >= 500) %>% data.frame(term=names(.), freq=.)
+	df <- dtm %>% as.matrix %>% colSums %>% subset (. >= 1000) %>% data.frame(term=names(.), freq=.)
 	#do you see any new stopwords that could be added to the list
 	ggplot(df, aes(x = term, y = freq)) + geom_bar(stat = "identity") +xlab("Terms") + ylab("Count") + coord_flip()
 
 	#--------------------Cluster and and Plot dendogram ---------------------------------------
 
 	#We can subset to  200 papers if we have thounsands
-	#dtm <- dtm[1:200,]
+	dtm <- dtm[1:500,]
 
 	# Compute distance matrix https://stat.ethz.ch/R-manual/R-devel/library/stats/html/dist.html
 	#https://en.wikipedia.org/wiki/Distance_matrix
@@ -86,8 +88,8 @@ my_file <- "my_Scopus_TSE_articles_clean_data.RData"
 	pdf(my_pdf_file, width=40, height=15)
 	par(cex=0.7, mar=c(5, 8, 4, 1))
 	#Remember we removed stopwords from title so the variable Title no longer make sense
-	plot(h, labels = my_articles$Title, sub = "")
+	#plot(h, labels = my_articles$Title, sub = "")
 	#when using smaller set e.g. 200 articles only
-	#plot(h, labels = my_articles$Title[1:200], sub = "")
+	plot(h, labels = my_articles$Title[1:500], sub = "")
 	dev.off()
 #}
