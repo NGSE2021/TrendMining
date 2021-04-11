@@ -98,7 +98,7 @@ my_file <- "my_STO_www_data_clean.RData"
 #                      #"0.25 < Q2 <= 0.5", 
 #                      "0.33 < Q2 <= 0.66", "Q3 > 0.66")
 
-    comparison.cloud(tdm, max.words=50, rot.per=0, title.size=1.5, colors=brewer.pal(3,"Set1"))
+    comparison.cloud(tdm, max.words=50, rot.per=0, title.size=1.5, colors=brewer.pal(4,"Set1"))
   
   rm(my_articles)
   
