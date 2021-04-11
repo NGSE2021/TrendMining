@@ -5,9 +5,11 @@ library(magrittr)
 library(tm)
 library(wordcloud)
 
-my_stopwords = c(stopwords::stopwords(language = "en", source = "snowball"),"myStopword1", "myStopword2")
+my_stopwords = c(stopwords::stopwords(language = "en", source = "snowball"),"one","like","need","want","tried","trying","know", "show","present","online","using","use","used","study","different","propose","web","two","also","new","paper","large","can","however","welcome","chairs","working","read","work","list","via","multiple","number","change","values","properly","load","file")
 #EDIT this row
-my_file <- "my_Scopus_TSE_articles_clean_data.RData"
+#my_file <- "my_Scopus_www_articles_clean_data.RData"
+my_file <- "my_STO_www_data_clean.RData"
+
 #draw_ComparisonCloud = function(my_file){
 
   my_temp_file = paste(my_data_dir, "/", sep="")
@@ -60,17 +62,25 @@ my_file <- "my_Scopus_TSE_articles_clean_data.RData"
               my_articles$Cites <= quantile(my_articles$Cites, probs = 0.75)]
   q4_t <- my_articles$Title[my_articles$Cites > quantile(my_articles$Cites, probs = 0.75)]
 
+# 3-way
+#  q1_t <- my_articles$Title[my_articles$Cites <= quantile(my_articles$Cites, probs = 0.33)]
+#  #q2_t <- my_articles$Title[my_articles$Cites > quantile(my_articles$Cites, probs = 0.25) &
+  #            my_articles$Cites <= quantile(my_articles$Cites, probs = 0.5)]
+#  q3_t <- my_articles$Title[my_articles$Cites > quantile(my_articles$Cites, probs = 0.33) &
+#                              my_articles$Cites <= quantile(my_articles$Cites, probs = 0.66)]
+#  q4_t <- my_articles$Title[my_articles$Cites > quantile(my_articles$Cites, probs = 0.66)]
+  
   if(length(q1_t) == 0)
     q1_t = "no_data"
-  if(length(q2_t) == 0)
-    q2_t = "no_data"
+  if(length(q2_t) == 0) #comment this when 3-way
+    q2_t = "no_data" #comment this when 3-way
   if(length(q3_t) == 0)
     q3_t = "no_data"
   if(length(q4_t) == 0)
     q4_t = "no_data"
   
   all_titles <- c(paste(q1_t, collapse=" "), 
-          paste(q2_t, collapse=" "),
+          paste(q2_t, collapse=" "),  #comment this when 3-way
           paste(q3_t, collapse=" "), 
           paste(q4_t, collapse=" "))
 
@@ -80,9 +90,15 @@ my_file <- "my_Scopus_TSE_articles_clean_data.RData"
   
   tdm <- all_titles %>% VectorSource %>% Corpus %>% TermDocumentMatrix %>% as.matrix
 
-  colnames(tdm) <- c ("Q1 <= 0.25", "0.25 < Q2 <= 0.5", 
+  colnames(tdm) <- c ("Q1 <= 0.25", 
+                      "0.25 < Q2 <= 0.5", 
                       "0.5 < Q3 <= 0.75", "Q4 > 0.75")
-  comparison.cloud(tdm, max.words=50, rot.per=0, title.size=1.5, colors=brewer.pal(4,"Set1"))
+# 3-way
+#  colnames(tdm) <- c ("Q1 <= 0.33", 
+#                      #"0.25 < Q2 <= 0.5", 
+#                      "0.33 < Q2 <= 0.66", "Q3 > 0.66")
+
+    comparison.cloud(tdm, max.words=50, rot.per=0, title.size=1.5, colors=brewer.pal(3,"Set1"))
   
   rm(my_articles)
   

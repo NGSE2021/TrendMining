@@ -10,7 +10,8 @@ library(magrittr)
 library(wordcloud)
 
 #EDIT this row
-my_file <- "my_Scopus_TSE_articles_clean_data.RData"
+#my_file <- "my_Scopus_www_articles_clean_data.RData"
+my_file <- "my_STO_www_data_clean.RData"
 
 #draw_myWordCloud = function(my_file){
   
@@ -24,7 +25,7 @@ my_file <- "my_Scopus_TSE_articles_clean_data.RData"
   my_text = tolower(my_text)
   
   #remove more words that we do not care about 
-  my_stopwords = c(stopwords::stopwords(language = "en", source = "snowball"),"myStopword1", "myStopword2")
+  my_stopwords = c(stopwords::stopwords(language = "en", source = "snowball"),"one","like","need","want","tried","trying","know", "show","present","online","using","use","used","study","different","propose","web","two","also","new","paper","large","can","however")
   
   
   my_text = removeWords(my_text, my_stopwords)
