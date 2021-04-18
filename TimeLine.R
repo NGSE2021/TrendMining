@@ -84,7 +84,7 @@ median(my_articles2$Cites[my_articles2$Date <= median(my_articles2$Date)])
 #Notice the minus sign descending order
 head(my_articles$Cites[order(-my_articles$Cites)], n=5)
 head(my_articles$Title[order(-my_articles$Cites)], n=5)
-head(my_articles$Abstract[order(-my_articles$Cites)], n=5)
+head(my_articles$Abstract_clean[order(-my_articles$Cites)], n=5)
 
 #This is optional just for kick analysis. Feel free to added to your report if you like. 
 #We can test more more things. Recently it was claimed that in econometrics that shorter articles get more citations. Lets see
@@ -103,22 +103,36 @@ summary(my_articles2$Cites[nchar(my_articles2$Title) <= median (nchar(my_article
 #Lets split four ways
 
 q1_t <- my_articles$Cites[nchar(my_articles2$Title) <= quantile(nchar(my_articles2$Title), probs = 0.25)]
+
 q2_t <- my_articles$Cites[nchar(my_articles2$Title)> quantile(nchar(my_articles2$Title), probs = 0.25) &
                             nchar(my_articles2$Title) <= quantile(nchar(my_articles2$Title), probs = 0.5)]
 q3_t <- my_articles$Cites[nchar(my_articles2$Title) > quantile(nchar(my_articles2$Title), probs = 0.5) &
                             nchar(my_articles2$Title) <= quantile(nchar(my_articles2$Title), probs = 0.75)]
 q4_t <- my_articles$Cites[nchar(my_articles2$Title) > quantile(nchar(my_articles2$Title), probs = 0.75)]
 
-if(q1_t < 0)
-{
-        q1_t=0
-}
+
 
 boxplot(q1_t,q2_t, q3_t, q4_t, names=c("shorter", "short", "long", "longer"), main="Title Length(x) & Citations(y)\nWorld Wide Web")
 summary(q1_t)
 summary(q2_t)
 summary(q3_t)
 summary(q4_t)
+
+q1_t
+q1_t[q1_t<0] <- 0
+q1_t
+
+q2_t
+q2_t[q2_t<0] <- 0
+q2_t
+
+q3_t
+q3_t[q3_t<0] <- 0
+q3_t
+
+q4_t
+q4_t[q4_t<0] <- 0
+q4_t
 
 #Lets try log scale. We need to add +1 since log(0) is undefined and log(1) is zero
 boxplot(q1_t+1,q2_t+1, q3_t+1, q4_t+1,log="y", names=c("shorter", "short", "long", "longer"), main="Title length(x) & Citations(y)\nWorld Wide Web\n")
