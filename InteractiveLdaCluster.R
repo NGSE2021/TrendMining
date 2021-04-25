@@ -1,14 +1,16 @@
-#install.packages("text2vec", dependencies=TRUE)
-#install.packages("tm", dependencies=TRUE)
-#install.packages("magrittr", dependencies=TRUE)
-#install.packages("LDAvis")
+install.packages("text2vec", dependencies=TRUE)
+install.packages("tm", dependencies=TRUE)
+install.packages("magrittr", dependencies=TRUE)
+install.packages("LDAvis")
 library(text2vec)
 library(tm)
 library(magrittr)
 library(LDAvis)
 
 #May take a while - wait patiently
-my_file = "my_Scopus_TSE_articles_clean_data.RData"
+#my_file = "my_Scopus_TSE_articles_clean_data.RData"
+#my_file <- "my_Scopus_www_articles_clean_data.RData"
+my_file <- "my_STO_www_data_clean.RData"
 #draw_my_IAMap = function(my_file) {
   
   print(paste("Interactive LDA Cluster, my_file: ", my_file))
@@ -25,7 +27,7 @@ my_file = "my_Scopus_TSE_articles_clean_data.RData"
   
   it = itoken(my_tokens)
   
-  my_stopwords = c(stopwords::stopwords(language = "en", source = "snowball"),"myStopword1", "myStopword2")
+  my_stopwords = c(stopwords::stopwords(language = "en", source = "snowball"),"one","like","need","want","tried","trying","know", "show","present","online","using","use","used","study","different","propose","web","two","also","new","paper","large","can","however","welcome","chairs","working","read","work","list","via","multiple","number","change","values","properly","load","file", "just", "text","find","error","make")
   
   
   #Remove stopwords
@@ -37,7 +39,7 @@ my_file = "my_Scopus_TSE_articles_clean_data.RData"
   my_vocab <- prune_vocabulary(my_vocab,
                                term_count_min=10,
                                vocab_term_max=40000, 
-                               doc_proportion_max=0.5)
+                               doc_proportion_max=0.1)
 
   #Create DTM
   #dtm = create_dtm(it, vocab_vectorizer(vocab),'lda_c')

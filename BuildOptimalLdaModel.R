@@ -17,13 +17,15 @@ library("tokenizers")
 
 #Set the file to be analyzed, e.g.
 my_file = "my_Scopus_TSE_articles_clean_data.RData"
+#my_file <- "my_Scopus_www_articles_clean_data.RData"
+my_file <- "my_STO_www_data_clean.RData"
 
 my_temp_file = paste(my_data_dir, "/", sep="")
 my_temp_file = paste(my_temp_file, my_file, sep="")
 load(my_temp_file)
 
-my_stopwords = c(stopwords::stopwords(language = "en", source = "snowball"),"myStopword1", "myStopword2")
-
+#my_stopwords = c(stopwords::stopwords(language = "en", source = "snowball"),"myStopword1", "myStopword2")
+my_stopwords = c(stopwords::stopwords(language = "en", source = "snowball"),"one","like","need","want","tried","trying","know", "show","present","online","using","use","used","study","different","propose","web","two","also","new","paper","large","can","however","welcome","chairs","working","read","work","list","via","multiple","number","change","values","properly","load","file", "just", "text","find","error","make")
 #Articles with NA dates cause false analysis later kick them out
 my_articles <- my_articles[which(!is.na(my_articles$Date)),]
 my_text <- paste (my_articles$Title, my_articles$Abstract_clean)
