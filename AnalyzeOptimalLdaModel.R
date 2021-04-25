@@ -10,7 +10,7 @@ library("text2vec")
 library("nnet") #Breaks ties at random when searching for max
 
 
-my_file = "my_Scopus_TSE_articles_clean_data.RData"
+my_file <- "my_Scopus_www_articles_clean_data.RData"
 #Articles. Make sure this is the same you used to build LDA model otherwise it will not make any sense
 my_temp_file = paste(my_data_dir, "/", sep="")
 my_temp_file = paste(my_temp_file, my_file, sep="")
@@ -105,7 +105,7 @@ theta = doc_topic_distr
 #**************************************************************
 #year_limiter = (Years > 1978 & Years < 2015)
 #year_limiter = (Years > 1980 & Years < 1990)
-year_limiter = Years >= 2007
+#year_limiter = Years >= 2007
 Years = Years[year_limiter]
 years = levels(factor(unlist(Years)))
 

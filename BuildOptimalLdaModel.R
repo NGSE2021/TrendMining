@@ -16,9 +16,9 @@ library("tokenizers")
 #source ("mclapply.hack.R")
 
 #Set the file to be analyzed, e.g.
-my_file = "my_Scopus_TSE_articles_clean_data.RData"
-#my_file <- "my_Scopus_www_articles_clean_data.RData"
-my_file <- "my_STO_www_data_clean.RData"
+#my_file = "my_Scopus_TSE_articles_clean_data.RData"
+my_file <- "my_Scopus_www_articles_clean_data.RData"
+#my_file <- "my_STO_www_data_clean.RData"
 
 my_temp_file = paste(my_data_dir, "/", sep="")
 my_temp_file = paste(my_temp_file, my_file, sep="")
@@ -49,8 +49,8 @@ vectorizer = vocab_vectorizer(v)
 #create document-term matrix
 dtm = create_dtm(it, vectorizer, type = "dgTMatrix")
 
-# we create 10 topics 
-lda_model = LDA$new(n_topics = 10, doc_topic_prior = 0.1, topic_word_prior = 0.01)
+# we create 10 topics 402.1581 0.1655799 0.001627607
+lda_model = LDA$new(n_topics = 402.1581, doc_topic_prior = 0.1655799, topic_word_prior = 0.001627607)
 doc_topic_distr = lda_model$fit_transform(x = dtm, n_iter = 1000, 
                           convergence_tol = 0.001, n_check_convergence = 25, 
                           #convergence_tol = 0.01, n_check_convergence = 25, 
@@ -95,7 +95,8 @@ it <- itoken(tokens, progressbar = FALSE)
 v = create_vocabulary(it) %>% prune_vocabulary(term_count_min = 10, doc_proportion_max = 0.3)
 vectorizer = vocab_vectorizer(v)
 dtm = create_dtm(it, vectorizer, type = "dgTMatrix")
-lda_model = LDA$new(n_topics = 298, doc_topic_prior = 0.2518732, topic_word_prior = 0.005613016)
+#lda_model = LDA$new(n_topics = 402.1581, doc_topic_prior = 0.1655799, topic_word_prior = 0.001627607)
+lda_model = LDA$new(n_topics = 50, doc_topic_prior = 0.1, topic_word_prior = 0.001)
 doc_topic_distr = lda_model$fit_transform(x = dtm, n_iter = 1000, 
                                           convergence_tol = 0.001, n_check_convergence = 25, 
                                           #convergence_tol = 0.01, n_check_convergence = 25, 
